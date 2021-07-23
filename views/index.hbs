@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      aria-label="Text input with dropdown button"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle"
+        type="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >Dropdown</button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="sum d-flex justify-content">
+    <p>總金額</p>
+    <h1>200</h1>
+  </div>
+  <div class="expense">
+    <ul class="list-group">
+      <li class="list-group-item disabled container">
+        <div class="row">
+          <div class="front col-4">
+            <i class="fas fa-home category"></i>
+            <h2 class="name">家庭支出</h2>
+            <span class="date">2020/04/23</span>
+          </div>
+          <div class="expense col-4">
+            <p class="expense number">60</p>
+          </div>
+          <div class="col-4">
+            <a class="btn btn-success">edit</a>
+            <form
+              action="/todos/{{this._id}}?_method=DELETE"
+              method="POST"
+              style="display: inline;"
+            >
+              <button class="btn btn-danger" type="submit">delete</button>
+            </form>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <button type="button" class="btn btn-primary">新增支出</button>
+</div>

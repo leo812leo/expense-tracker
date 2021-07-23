@@ -7,11 +7,13 @@ const PORT = 3000
 
 app = express()
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
+app.set('view engine', 'hbs')
+//seeting
+
 
 app.get('/', (req, res) => {
-  res.send('hello')
+  res.render('index')
 })
 
 app.listen(PORT, () => {
