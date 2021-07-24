@@ -1,0 +1,42 @@
+<div class="container mx-auto d-flex flex-column align-items-center">
+  <head>
+    <h4>請輸入你的支出</h4>
+  </head>
+  <form class="m-5">
+    <div class="form-group form-inline">
+      <label for="inputEmail4">名稱</label>
+      <input
+        type="name"
+        class="form-control ml-2 col-10"
+        id="name"
+        placeholder="name"
+      />
+    </div>
+    <div class="form-group form-inline">
+      <label for="inputPassword4">日期</label>
+      <input
+        type="date"
+        class="form-control ml-2 col-10"
+        id="date"
+        placeholder="date"
+      />
+    </div>
+    <div class="form-group form-inline">
+      <label for="inputState">類別</label>
+      <select id="inputState" class="form-control ml-2 col-10">
+        <option selected>Choose...</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+    </div>
+    <div class="form-group form-inline">
+      <label for="inputZip ">金額</label>
+      <input type="number" class="form-control ml-2 col-10" id="expense" />
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">新增支出</button>
+    </div>
+
+  </form>
+</div>

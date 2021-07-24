@@ -1,49 +1,47 @@
 <div class="container">
-  <div class="input-group">
-    <input
-      type="text"
-      class="form-control"
-      aria-label="Text input with dropdown button"
-    />
-    <div class="input-group-append">
-      <button
-        class="btn btn-outline-secondary dropdown-toggle"
-        type="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >Dropdown</button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div role="separator" class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-      </div>
+  <div class="input-group my-5 justify-content-center">
+    <div class="form-group col-6">
+      <select id="inputState" class="form-control ml-2">
+        <option selected>Choose...</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
     </div>
   </div>
 </div>
 <div class="container">
-  <div class="sum d-flex justify-content">
-    <p>總金額</p>
-    <h1>200</h1>
+  <div class="sum d-flex justify-content-center">
+    <p>總金額:
+      <h1 id="totalAmount" style=" font-size: 100px;margin-left: 10px;">200</h1>
+    </p>
   </div>
   <div class="expense">
     <ul class="list-group">
       <li class="list-group-item disabled container">
-        <div class="row">
-          <div class="front col-4">
-            <i class="fas fa-home category"></i>
-            <h2 class="name">家庭支出</h2>
-            <span class="date">2020/04/23</span>
+        <div class="row justify-content-between">
+          <div class="d-flex justify-content-between col-8">
+            <div class="front row">
+              <div
+                class="d-flex justify-content-center align-items-center"
+                id="category"
+              >
+                <i class="fas fa-home fa-3x category" id="category"></i>
+              </div>
+              <div>
+                <h2 class="name">家庭支出</h2>
+                <span class="date">2020/04/23</span>
+              </div>
+            </div>
+            <div class="expense col-4">
+              <h2 class="expense number">60</h2>
+            </div>
           </div>
-          <div class="expense col-4">
-            <p class="expense number">60</p>
-          </div>
-          <div class="col-4">
-            <a class="btn btn-success">edit</a>
+
+          <div class="col-3">
+            <a class="btn btn-success" href="/expense/edit">edit</a>
             <form
-              action="/todos/{{this._id}}?_method=DELETE"
+              action="/expense/{{this._id}}?_method=DELETE"
               method="POST"
               style="display: inline;"
             >
@@ -54,5 +52,8 @@
       </li>
     </ul>
   </div>
-  <button type="button" class="btn btn-primary">新增支出</button>
+  <div class="my-5" style="text-align: center;">
+    <a type="button" class="btn btn-primary" href="/expense/new">新增支出</a>
+  </div>
+
 </div>
