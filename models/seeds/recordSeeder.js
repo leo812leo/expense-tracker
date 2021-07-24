@@ -11,14 +11,9 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
   data = Seed['recordSeeds']
-  data.forEach((item) => {
-    Expense.create({
-      name: item.name,
-      merchant: item.merchant,
-      category: item.category,
-      date: item.date,
-      amount: item.amount,
-    })
+  Expense.create(data).then(() => {
+    console.log('Success to set the record seeder!')
+    db.close()
+    console.log('end')
   })
-  console.log('Success to set the seeder!')
 })
