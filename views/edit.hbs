@@ -2,14 +2,17 @@
   <head>
     <h4>請輸入你的支出</h4>
   </head>
-  <form class="m-5">
+
+  <form class="m-5" action="/expense/{{expense._id}}?_method=PUT" method="POST">
     <div class="form-group form-inline">
       <label for="inputEmail4">名稱</label>
       <input
         type="name"
         class="form-control ml-2 col-10"
         id="name"
+        name="name"
         placeholder="name"
+        value="{{expense.name}}"
       />
     </div>
     <div class="form-group form-inline">
@@ -18,25 +21,36 @@
         type="date"
         class="form-control ml-2 col-10"
         id="date"
+        name="date"
         placeholder="date"
+        value="{{expense.date}}"
       />
     </div>
     <div class="form-group form-inline">
       <label for="inputState">類別</label>
-      <select id="inputState" class="form-control ml-2 col-10">
-        <option selected>Choose...</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
+      <select id="inputState" class="form-control ml-2 col-10" name="category">
+        <option value="housewares">家居物業</option>
+        <option value="transportation">交通出行</option>
+        <option value="entertainment">休閒娛樂</option>
+        <option value="consumption">餐飲食品</option>
+        <option value="others">其他</option>
       </select>
     </div>
     <div class="form-group form-inline">
       <label for="inputZip ">金額</label>
-      <input type="number" class="form-control ml-2 col-10" id="expense" />
+      <input
+        type="number"
+        class="form-control ml-2 col-10"
+        id="expense"
+        name="amount"
+        value="{{expense.amount}}"
+      />
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-primary">新增支出</button>
+      <button type="submit" class="btn btn-primary">修改</button>
     </div>
-
   </form>
 </div>
+<script>
+  document.querySelector('option[value={{expense.category}}]').selected = true
+</script>

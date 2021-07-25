@@ -15,9 +15,9 @@ const PORT = 3000
 app = express()
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
-
-
-
+app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   // asynchronous
@@ -34,24 +34,50 @@ app.get('/', (req, res) => {
         record.iconClass = categoryToClass[record.category]
         record.date = moment(record.date).format('YYYY-MM-DD')
       })
-      console.log(records)
       //render
       res.render('index', { records })
     })
     .catch(err => console.log(err))
 })
 
-
-
-
-
+/* creat */
+//to creat page
 app.get('/expense/new', (req, res) => {
   res.render('new')
 })
-
-app.get('/expense/edit', (req, res) => {
-  res.render('edit')
+//creat expense
+app.post('/expense', (req, res) => {
+  Record.create(req.body)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
+
+/* update */
+// to edit page
+app.get('/expense/edit/:id', (req, res) => {
+  const id = req.params.id
+  Record.findById(id)
+    .lean()
+    .then((expense) => {
+      expense.date = moment(expense.date).format('YYYY-MM-DD')
+      res.render('edit', { expense })
+    })
+    .catch(error => console.log(error))
+})
+// edit expense
+app.put('/expense/:id', (req, res) => {
+  const id = req.params.id
+  const { name, date, category, amount } = req.body
+  Record.findById(id)
+    .then((expense) => {
+      [expense.name, expense.date, expense.category, expense.amount] = [name, date, category, amount]
+      expense.save()
+    })
+    .then(() => res.redirect(`/`))
+    .catch(error => console.log(error))
+})
+
+
 
 //app.delet()
 

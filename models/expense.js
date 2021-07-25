@@ -8,7 +8,7 @@ const expenseSchema = new Schema({
   },
   merchant: {
     type: String,
-    required: true
+    required: false
   },
   category: {
     type: String,
