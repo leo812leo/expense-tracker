@@ -7,9 +7,10 @@ const Record = require('../../models/expense')
 const Category = require('../../models/category')
 
 router.get('/', (req, res) => {
-  // asynchronous
+  const filter = req.query.filter ? { category: req.query.filter } : {}
   const categoryToClass = {}
-  Promise.all([Record.find().lean(), Category.find().lean()])
+  // asynchronous
+  Promise.all([Record.find(filter).lean(), Category.find().lean()])
     .then(results => {
       const [records, categories] = results
       //make category2class dictionary
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
         record.date = moment(record.date).format('YYYY-MM-DD')
       })
       //render
-      res.render('index', { records })
+      res.render('index', { records, filter_value: req.query.filter })
     })
     .catch(err => console.log(err))
 })

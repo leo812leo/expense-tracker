@@ -1,12 +1,21 @@
 <div class="container">
   <div class="input-group my-5 justify-content-center">
     <div class="form-group col-6">
-      <select id="inputState" class="form-control ml-2">
-        <option selected>Choose...</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </select>
+      <form action="/" method="GET">
+        <select
+          id="inputState"
+          class="form-control ml-2"
+          onchange="submit()"
+          name="filter"
+        >
+          <option value="">ALL</option>
+          <option value="housewares">家居物業</option>
+          <option value="transportation">交通出行</option>
+          <option value="entertainment">休閒娛樂</option>
+          <option value="consumption">餐飲食品</option>
+          <option value="others">其他</option>
+        </select>
+      </form>
     </div>
   </div>
 </div>
@@ -68,5 +77,6 @@
 <SCript>
   let totalAmount = document.querySelector('#totalAmount'); const costList =
   document.querySelectorAll('.expense.number'); let count = 0; costList.forEach(
-  (cost) => { count += Number(cost.innerText) }); totalAmount.innerText = count
+  (cost) => { count += Number(cost.innerText) }); totalAmount.innerText = count;
+  document.querySelector('option[value={{filter_value}}]').selected = true
 </SCript>
