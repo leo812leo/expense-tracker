@@ -4,11 +4,3 @@
 .ul li:nth-child(odd) {
   background: #fff;
 } */
-
-body {
-  background-color: #757575;
-}
-
-* {
-  border: black 1px solid;
-}

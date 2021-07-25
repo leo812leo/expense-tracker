@@ -1,0 +1,1 @@
+document.querySelector('option[value={{expense.category}}]').selected = true
