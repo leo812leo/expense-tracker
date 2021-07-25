@@ -64,6 +64,7 @@ app.get('/expense/edit/:id', (req, res) => {
     })
     .catch(error => console.log(error))
 })
+
 // edit expense
 app.put('/expense/:id', (req, res) => {
   const id = req.params.id
@@ -77,9 +78,14 @@ app.put('/expense/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-//app.delet()
+/* delet */
+app.delete('/expense/:id', (req, res) => {
+  const id = req.params.id
+  Record.findById(id)
+    .then(expense => expense.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 
 app.listen(PORT, () => {
