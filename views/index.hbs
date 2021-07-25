@@ -16,44 +16,54 @@
       <h1 id="totalAmount" style=" font-size: 100px;margin-left: 10px;">200</h1>
     </p>
   </div>
+
   <div class="expense">
     <ul class="list-group">
-      <li class="list-group-item disabled container">
-        <div class="row justify-content-between">
-          <div class="d-flex justify-content-between col-8">
-            <div class="front row">
-              <div
-                class="d-flex justify-content-center align-items-center"
-                id="category"
-              >
-                <i class="fas fa-home fa-3x category" id="category"></i>
+      {{#each records}}
+        <li class="list-group-item disabled container">
+          <div class="row justify-content-between">
+            <div class="d-flex justify-content-between col-8">
+              <div class="front row">
+                <div
+                  class="d-flex justify-content-center align-items-center"
+                  id="category"
+                >
+                  <i
+                    class="{{this.iconClass}} fa-3x category"
+                    id="category"
+                  ></i>
+                </div>
+                <div>
+                  <h2 class="name">{{this.name}}</h2>
+                  <span class="date">{{this.date}}</span>
+                </div>
               </div>
-              <div>
-                <h2 class="name">家庭支出</h2>
-                <span class="date">2020/04/23</span>
+              <div class="expense col-4">
+                <h2 class="expense number">{{this.amount}}</h2>
               </div>
             </div>
-            <div class="expense col-4">
-              <h2 class="expense number">60</h2>
-            </div>
-          </div>
 
-          <div class="col-3">
-            <a class="btn btn-success" href="/expense/edit">edit</a>
-            <form
-              action="/expense/{{this._id}}?_method=DELETE"
-              method="POST"
-              style="display: inline;"
-            >
-              <button class="btn btn-danger" type="submit">delete</button>
-            </form>
+            <div class="col-3">
+              <a class="btn btn-success" href="/expense/edit">edit</a>
+              <form
+                action="/expense/{{this._id}}?_method=DELETE"
+                method="POST"
+                style="display: inline;"
+              >
+                <button class="btn btn-danger" type="submit">delete</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
+      {{/each}}
     </ul>
   </div>
   <div class="my-5" style="text-align: center;">
     <a type="button" class="btn btn-primary" href="/expense/new">新增支出</a>
   </div>
-
 </div>
+<SCript>
+  let totalAmount = document.querySelector('#totalAmount'); const costList =
+  document.querySelectorAll('.expense.number'); let count = 0; costList.forEach(
+  (cost) => { count += Number(cost.innerText) }); totalAmount.innerText = count
+</SCript>
