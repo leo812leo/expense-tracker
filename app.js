@@ -13,7 +13,7 @@ const Category = require('./models/category')
 
 //seeting
 app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 // express template engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
