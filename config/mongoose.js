@@ -11,5 +11,4 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-
-module.exports = db  //seeder用
+module.exports = db // seeder用
