@@ -10,7 +10,7 @@ db.on('error', () => {
 
 db.once('open', () => {
   console.log('mongodb connected!')
-  data = Seed['recordSeeds']
+  const data = Seed.recordSeeds
   Expense.create(data).then(() => {
     console.log('Success to set the record seeder!')
     db.close()
