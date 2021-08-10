@@ -31,6 +31,13 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 // passport
 usePassport(app)
+// 新增middleware
+app.use((req, res, next) => {
+  // 你可以在這裡 console.log(req.user) 等資訊來觀察
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 // 將 request 導入路由器
 app.use(routes)
 

@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 const moment = require('moment')
 // import data
-const Record = require('../../models/expense')
+const Expense = require('../../models/expense')
 const Category = require('../../models/category')
 
 /* creat */
@@ -13,7 +13,7 @@ router.get('/new', (req, res) => {
 })
 // creat expense
 router.post('/', (req, res) => {
-  Record.create(req.body)
+  Expense.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 // to edit page
 router.get('/edit/:id', (req, res) => {
   const id = req.params.id
-  Record.findById(id)
+  Expense.findById(id)
     .lean()
     .then((expense) => {
       expense.date = moment(expense.date).format('YYYY-MM-DD')
@@ -35,7 +35,7 @@ router.get('/edit/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id
   const { name, date, category, amount } = req.body
-  Record.findById(id)
+  Expense.findById(id)
     .then((expense) => {
       [expense.name, expense.date, expense.category, expense.amount] = [name, date, category, amount]
       expense.save()
@@ -47,7 +47,7 @@ router.put('/:id', (req, res) => {
 /* delet */
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  Record.findById(id)
+  Expense.findById(id)
     .then(expense => expense.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

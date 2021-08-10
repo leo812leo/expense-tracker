@@ -13,11 +13,21 @@
     />
   </head>
 
-  <nav class="nav bg-light px-auto py-3">
-
-    <h3 class="px-5" herf="/"><a href="/">家庭記帳本</a></h3>
-  </nav>
+  {{! <nav class="nav bg-light px-auto py-3"></nav> }}
+  <header>
+    <nav class="navbar navbar-dark bg-primary justify-content-between">
+      <a class="navbar-brand" href="/">
+        {{#if isAuthenticated}}{{user.name}}'s {{/if}}
+        家庭記帳本</a>
+      {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn btn-outline-light">Logout</a>
+      {{else}}
+        <a href="/users/login" class="btn btn-outline-light">Login</a>
+      {{/if}}
+    </nav>
+  </header>
   <body>
+
     {{{body}}}
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
