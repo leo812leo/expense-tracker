@@ -6,7 +6,7 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
   // 設定本地登入策略
-  passport.use(new LocalStrategy({ username: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
@@ -17,7 +17,7 @@ module.exports = app => {
         }
         return done(null, user)
       })
-      .catch(err => done(err, null))
+      .catch(err => done(err, false))
   }))
   // 設定序列化與反序列化
   passport.serializeUser((user, done) => {
@@ -27,6 +27,6 @@ module.exports = app => {
     User.findById(id)
       .lean()
       .then(user => done(null, user))
-      .catch(err => done(err, null))
+      .catch(err => done(err, false))
   })
 }
