@@ -2,17 +2,16 @@
 const express = require('express')
 const router = express.Router()
 const moment = require('moment')
-//import data
+// import data
 const Record = require('../../models/expense')
 const Category = require('../../models/category')
 
-
 /* creat */
-//to creat page
+// to creat page
 router.get('/new', (req, res) => {
   res.render('new')
 })
-//creat expense
+// creat expense
 router.post('/', (req, res) => {
   Record.create(req.body)
     .then(() => res.redirect('/'))
