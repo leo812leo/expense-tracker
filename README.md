@@ -46,26 +46,27 @@
 1. 透過 https 取得此專案
 
 ```bash
-$ git clone https://github.com/Kcih4518/expense-tracker.git
+https://github.com/leo812leo/expense-tracker.git
 ```
 
 2. 安裝 node module
 
 ```bash
-$ cd expense-tracker.git
-$ npm install
+cd expense-tracker
+npm install
 ```
 
-3. 根據需求修改.env.example 的內容並更換其檔名
+3. 根據需求修改.example 的內容並更換其檔名
 
 ```bash
-$ vim .env.example
-$ mv .env.example .env
+$ vim .example
+(註:存檔離開vim指令為 :wq)
+$ mv .example .env
 ```
 
 4. 載入 Record Seeds
 
-本專案需在 local 建立 MongoDB 並且使用預設 port 27017。
+本專案需在 local 建立 MongoDB 並且使用預設 port 3000。
 
 ```bash
 $ npm run seed
@@ -80,4 +81,3 @@ Express is running on http://localhost:3000
 
 6. 透過 Browser 打開 [http://localhost:3000](http://localhost:3000)
 
-![](https://i.imgur.com/4F6h1JT.png)
