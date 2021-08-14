@@ -19,4 +19,3 @@ db.once('open', () => {
     console.log('connection close')
   })
 })
-

@@ -13,7 +13,17 @@ router.get('/new', (req, res) => {
 })
 // creat expense
 router.post('/', (req, res) => {
-  Expense.create(req.body)
+  const userId = req.user._id
+  const item = Object.assign(req.body, { userId })
+  Category.findOne({ name: req.body.category }).lean()
+    .then(category => {
+      item.categoryID = category._id
+      return item
+    })
+    .then(item => {
+      console.log(item)
+      Expense.create(item)
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -21,8 +31,9 @@ router.post('/', (req, res) => {
 /* update */
 // to edit page
 router.get('/edit/:id', (req, res) => {
-  const id = req.params.id
-  Expense.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Expense.findOne({ _id, userId })
     .lean()
     .then((expense) => {
       expense.date = moment(expense.date).format('YYYY-MM-DD')
@@ -31,23 +42,37 @@ router.get('/edit/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// edit expense
+// edit expense (put)
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  const { name, date, category, amount } = req.body
-  Expense.findById(id)
-    .then((expense) => {
-      [expense.name, expense.date, expense.category, expense.amount] = [name, date, category, amount]
+  const userId = req.user._id
+  const _id = req.params.id
+  const newExpense = req.body
+  console.log(newExpense)
+  const categoryToId = {}
+  Promise.all([Expense.findOne({ _id, userId }), Category.find().lean()])
+    .then((results) => {
+      const [expense, categories] = results
+      // make category2class dictionary
+      categories.forEach(category => {
+        categoryToId[category.name] = category._id
+      })
+      newExpense.categoryID = categoryToId[newExpense.category]
+      Object.assign(expense, newExpense)
       expense.save()
+      console.log('---------------')
+      console.log(expense)
+      console.log(newExpense)
+      console.log('---------------')
     })
-    .then(() => res.redirect(`/`))
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 /* delet */
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Expense.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Expense.findOne({ _id, userId })
     .then(expense => expense.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

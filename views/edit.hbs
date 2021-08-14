@@ -1,11 +1,11 @@
 <div class="container mx-auto d-flex flex-column align-items-center">
   <head>
-    <h4>請輸入你的支出</h4>
+    <h4>請輸完成修改</h4>
   </head>
 
   <form class="m-5" action="/expense/{{expense._id}}?_method=PUT" method="POST">
     <div class="form-group form-inline">
-      <label for="inputEmail4">名稱</label>
+      <label for="name">名稱</label>
       <input
         type="name"
         class="form-control ml-2 col-10"
@@ -16,7 +16,18 @@
       />
     </div>
     <div class="form-group form-inline">
-      <label for="inputPassword4">日期</label>
+      <label for="merchant">商家</label>
+      <input
+        type="name"
+        class="form-control ml-2 col-10"
+        id="merchant"
+        name="merchant"
+        placeholder="merchant"
+        value="{{expense.merchant}}"
+      />
+    </div>
+    <div class="form-group form-inline">
+      <label for="date">日期</label>
       <input
         type="date"
         class="form-control ml-2 col-10"
@@ -27,8 +38,8 @@
       />
     </div>
     <div class="form-group form-inline">
-      <label for="inputState">類別</label>
-      <select id="inputState" class="form-control ml-2 col-10" name="category">
+      <label for="category">類別</label>
+      <select id="category" class="form-control ml-2 col-10" name="category">
         <option value="housewares">家居物業</option>
         <option value="transportation">交通出行</option>
         <option value="entertainment">休閒娛樂</option>
@@ -37,12 +48,13 @@
       </select>
     </div>
     <div class="form-group form-inline">
-      <label for="inputZip ">金額</label>
+      <label for="amount">金額</label>
       <input
         type="number"
         class="form-control ml-2 col-10"
-        id="expense"
+        id="amount"
         name="amount"
+        min="1"
         value="{{expense.amount}}"
       />
     </div>
