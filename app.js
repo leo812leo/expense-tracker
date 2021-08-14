@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: true
 }))
 // express template engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: 'hbs' }))

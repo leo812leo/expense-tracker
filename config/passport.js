@@ -33,7 +33,6 @@ module.exports = app => {
     profileFields: ['email', 'displayName']
   }, (accessToken, refreshToken, profile, done) => {
     const { name, email } = profile._json
-    console.log(profile)
     User.findOne({ email })
       .then(user => {
         if (user) return done(null, user)

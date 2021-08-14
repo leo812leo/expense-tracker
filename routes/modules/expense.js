@@ -21,7 +21,6 @@ router.post('/', (req, res) => {
       return item
     })
     .then(item => {
-      console.log(item)
       Expense.create(item)
     })
     .then(() => res.redirect('/'))
@@ -47,7 +46,6 @@ router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   const newExpense = req.body
-  console.log(newExpense)
   const categoryToId = {}
   Promise.all([Expense.findOne({ _id, userId }), Category.find().lean()])
     .then((results) => {
@@ -59,10 +57,6 @@ router.put('/:id', (req, res) => {
       newExpense.categoryID = categoryToId[newExpense.category]
       Object.assign(expense, newExpense)
       expense.save()
-      console.log('---------------')
-      console.log(expense)
-      console.log(newExpense)
-      console.log('---------------')
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

@@ -33,7 +33,6 @@ router.get('/', async (req, res) => {
       return expenses
     })
     .then((expenses) => {
-      console.log('expenses', expenses)
       res.render('index', { expenses, filter_value: req.query })
     })
     .catch(err => console.log(err))

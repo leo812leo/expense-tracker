@@ -1,11 +1,16 @@
+// 載入套件
+const mongoose = require('mongoose')
+// import mongoDB data
+const Category = require('../category') // 載入 model
+// import seed data
+const categoryData = require('./seed.json').categorySeeds
+// 設定環境變數
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-const Category = require('../category') // 載入 model
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
+const MONGODB_URI = process.env.MONGODB_URI
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
-const categoryData = require('./seed.json').categorySeeds
 
 db.on('error', () => {
   console.log('mongodb error')
