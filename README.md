@@ -92,4 +92,5 @@ Express is running on http://localhost:3000
 | root3         | root3@example.com   |  456 |
 
 
-支出資料及類別資料，詳見 models/seeds/seed.json
+- 支出資料及類別資料
+詳見 models/seeds/seed.json
