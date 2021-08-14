@@ -4,7 +4,9 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 /* import User define modules */
 const usePassport = require('./config/passport')
 const routes = require('./routes')
