@@ -90,5 +90,16 @@
       "name_cn": "其他",
       "iconClass": "fas fa-pen"
     }
+  ],
+  "userSeeds":[
+{
+  "name": "root",
+  "email": "root@example.com",
+  "password": "12345678"
+} ,{
+  "name": "root2",
+  "email": "root2@example.com",
+  "password": "123" 
+}
   ]
 }
