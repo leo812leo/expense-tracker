@@ -1,5 +1,4 @@
-# Expense Tracker
-
+## :money_with_wings: Expense Tracker
 使用 Node.js + Express + express-handlebars + passport.js + mongoDB 打造的家庭開支記錄網頁。
 
 ## Getting Started
@@ -40,6 +39,7 @@
 - 使用者登入後，可以建立並管理專屬自己的一個支出清單
 - 使用者登出、註冊失敗、或登入失敗時，使用者都會在畫面上看到正確而清楚的系統訊息。
 - 使用者的密碼使用 bcrypt 來處理。
+- 使用種從資料庫中隨機新增使用者籍資料，測試使用者三人，資料各五筆
 
 ### Installing
 
