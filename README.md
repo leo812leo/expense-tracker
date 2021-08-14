@@ -84,10 +84,12 @@ Express is running on http://localhost:3000
 
 ## 測試資料
 - 人員資料
+
 | name            | email    | password |
 | --------------- | -------- |----------|
 | root          | root@example.com     | 12345678  |
 | root2         | root2@example.com   |  123 |
 | root3         | root3@example.com   |  456 |
+
 
 支出資料及類別資料，詳見 models/seeds/seed.json
