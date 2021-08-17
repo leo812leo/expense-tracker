@@ -1,7 +1,7 @@
 // import Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-const moment = require('moment')
+const dayjs = require('dayjs')
 // import data
 const Expense = require('../../models/expense')
 const Category = require('../../models/category')
@@ -24,7 +24,10 @@ router.post('/', (req, res) => {
       Expense.create(item)
     })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(err => {
+      console.log(err)
+      res.render('error', { error: err })
+    })
 })
 
 /* update */
@@ -35,10 +38,13 @@ router.get('/edit/:id', (req, res) => {
   Expense.findOne({ _id, userId })
     .lean()
     .then((expense) => {
-      expense.date = moment(expense.date).format('YYYY-MM-DD')
+      expense.date = dayjs(expense.date).format('YYYY-MM-DD')
       res.render('edit', { expense })
     })
-    .catch(error => console.log(error))
+    .catch(err => {
+      console.log(err)
+      res.render('error', { error: err })
+    })
 })
 
 // edit expense (put)
@@ -59,7 +65,10 @@ router.put('/:id', (req, res) => {
       expense.save()
     })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(err => {
+      console.log(err)
+      res.render('error', { error: err })
+    })
 })
 
 /* delet */
@@ -69,7 +78,10 @@ router.delete('/:id', (req, res) => {
   Expense.findOne({ _id, userId })
     .then(expense => expense.remove())
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(err => {
+      console.log(err)
+      res.render('error', { error: err })
+    })
 })
 
 module.exports = router

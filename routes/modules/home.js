@@ -13,14 +13,16 @@ router.get('/', async (req, res) => {
   // remove empty and add userId
   const filter = await filterProcess(otherFilter, category, userId)
   const dateFilter = dateFilterProcess(yearMonth)
-  const categoryIdToClass = {}
+
   // asynchronous
 
   await Promise.all([Expense
     // find Expense with specific condiction
     .find({ $and: [dateFilter, filter] }).lean(), Category.find().lean()])
     .then(results => {
+      const categoryIdToClass = {}
       const [expenses, categories] = results
+      let totalAmount = 0
       // make category2class dictionary
       categories.forEach(category => {
         categoryIdToClass[category._id] = category.iconClass
@@ -29,13 +31,18 @@ router.get('/', async (req, res) => {
       expenses.forEach(expense => {
         expense.iconClass = categoryIdToClass[expense.categoryID]
         expense.date = moment(expense.date).format('YYYY-MM-DD')
+        totalAmount += expense.amount
       })
-      return expenses
+      return [expenses, totalAmount]
     })
-    .then((expenses) => {
-      res.render('index', { expenses, filter_value: req.query })
+    .then((results) => {
+      const [expenses, totalAmount] = results
+      res.render('index', { expenses, filter_value: req.query, totalAmount })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.render('error', { error: err })
+    })
 })
 
 module.exports = router
@@ -53,7 +60,10 @@ function filterProcess(filter, category, userId) {
         Object.assign(filter, { categoryID: category._id })
         return filter
       })
-      .catch(error => console.log(error))
+      .catch(err => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   } else {
     return filter
   }

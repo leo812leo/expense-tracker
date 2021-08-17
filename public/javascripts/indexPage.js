@@ -6,4 +6,3 @@ costList.forEach((cost) => {
   count += Number(cost.innerText)
 })
 totalAmount.innerText = count
-

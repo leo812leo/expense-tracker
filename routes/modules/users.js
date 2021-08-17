@@ -28,7 +28,7 @@ router.get('/register', (req, res) => {
   return res.render('register')
 })
 // register post
-router.post('/register', (req, res) => {
+router.post('/register', (req, res,) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
   if (!name || !email || !password || !confirmPassword) {
@@ -62,7 +62,10 @@ router.post('/register', (req, res) => {
         password: hash
       }))
       .then(res.redirect('/'))
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        res.render('error', { error: err })
+      })
   })
 })
 
