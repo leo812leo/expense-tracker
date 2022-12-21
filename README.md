@@ -47,7 +47,7 @@ You can see on [heroku](https://desolate-meadow-87848.herokuapp.com/)
 1. 透過 https 取得此專案
 
 ```bash
-https://github.com/leo812leo/expense-tracker.git
+git clone https://github.com/leo812leo/expense-tracker.git
 ```
 
 2. 安裝 node module
